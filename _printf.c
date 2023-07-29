@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 				if (str == NULL)
 				{
 					fputs("(null)", stdout);
-					cha+= 6;
+					cha += 6;
 				}
 				else
 				{
