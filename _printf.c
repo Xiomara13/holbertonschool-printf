@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	va_list ar;
 	int cha = 0;
-	int i, c, j;
+	int i, j;
 
 	va_start(ar, format);
 
@@ -23,18 +23,25 @@ int _printf(const char *format, ...)
 
 			if (format[i] == 'c')
 			{
-				c = va_arg(ar, int);
-				putchar(c);
+				putchar(va_arg(ar, int));
 				cha++;
 			}
 			else if (format[i] == 's')
 			{
 				char *str = va_arg(ar, char *);
+				if (str == NULL)
+				{
+					fputs("(null)", stdout);
+					cha+= 6;
+				}
+				else
+				{
 
 				for (j = 0; str[j] != '\0'; j++)
 				{
 					putchar(str[j]);
 					cha++;
+				}
 				}
 			}
 			else if (format[i] == '%')
