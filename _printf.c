@@ -6,60 +6,41 @@
  * _printf - the function
  * @format: character
  * @...: arguments
+ * Return: cha
  */
 int _printf(const char *format, ...)
 {
 	va_list ar;
 	int cha = 0;
-	int i, j;
+	int i = 0;
 
-	if (format == NULL)
-	{
-		fputs("(null)", stdout);
-		return (6);
-	}
-
-	va_start(ar, format);
-
-	for (i = 0; format[i] != '\0'; i++)
+		va_start(ar, format);
+	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
 			i++;
-
-			if (format[i] == 'c')
-			{
-				putchar(va_arg(ar, int));
-				cha++;
-			}
-			else if (format[i] == 's')
-			{
-				char *str = va_arg(ar, char *);
-				if (str == NULL)
-				{
-					fputs("(null)", stdout);
-					cha += 6;
-				}
-				else
-				{
-
-				for (j = 0; str[j] != '\0'; j++)
-				{
-					putchar(str[j]);
-					cha++;
-				}
-				}
-			}
-			else if (format[i] == '%')
+			if (format[i] == '\0')
+				break;
+			if (format[i] == '%')
 			{
 				putchar('%');
 				cha++;
 			}
-		}
-		else
-		{
-			putchar(format[i]);
-			cha++;
+			else if (format[i] == 'c')
+			{
+				cha += _printf_charac(ar);
+			}
+			else if (format[i] == 's')
+			{
+				cha += _printf_cad(ar);
+			}
+			else
+			{
+				putchar(format[i]);
+				cha++;
+			}
+			i++;
 		}
 	}
 	va_end(ar);

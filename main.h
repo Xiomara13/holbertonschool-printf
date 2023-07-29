@@ -13,4 +13,6 @@ typedef struct pf
 }
 pf_t;
 int _printf(const char *format, ...);
+int _printf_charac(va_list ar);
+int _printf_cad(va_list ar);
 #endif /*MAIN_H*/
