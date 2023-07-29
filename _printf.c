@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			cha++;
+
 			if (format[i] == 'c')
 			{
 				c = va_arg(ar, int);
