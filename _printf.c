@@ -13,6 +13,12 @@ int _printf(const char *format, ...)
 	int cha = 0;
 	int i, j;
 
+	if (format == NULL)
+	{
+		fputs("(null)", stdout);
+		return (6);
+	}
+
 	va_start(ar, format);
 
 	for (i = 0; format[i] != '\0'; i++)
