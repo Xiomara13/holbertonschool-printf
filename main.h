@@ -17,5 +17,5 @@ int (*structf(char pf))(va_list);
 int _printf(const char *format, ...);                                                                 
 int _printf_charac(va_list ar);                                                                       
 int _printf_cad(va_list ar);  
-int pf_porcen(va_list ar);
+int pf_porcen(void);
 #endif /*MAIN_H*/ 
