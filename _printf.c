@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
-#include <stdbool.h>
 #include "main.h"
 /**
  * _printf - is a function
@@ -13,6 +12,7 @@ int _printf(const char *format, ...)
 {
 	va_list ar;
 	int cha = 0;
+	int num_ch;
 
 	va_start(ar, format);
 
@@ -21,22 +21,19 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == 's')
-			{
-				char *str = va_arg(ar, char *);
-				if (str == NULL)
-					cha += printf("(null)");
-				else
-					cha += printf("%S", str);
-			}
+			if (*format == '%')
+				cha += putchar('%');
 			else
 			{
-				int (*oper_fun)(va_list) = structf(*format);
-
-				if (oper_fun != NULL)
-					cha += oper_fun(ar);
+				num_ch = structf(*format)(ar);
+				if (num_ch == -1)
+				{
+					cha = -1;
+					break;
 				}
+				cha += num_ch;
 			}
+		}
 		else
 		{
 			putchar(*format);
