@@ -12,39 +12,35 @@ int _printf(const char *format, ...)
 {
 	va_list ar;
 	int cha = 0;
-	int num_ch;
 
 	va_start(ar, format);
 
-	while (format && *format)
+	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '%')
-				num_ch += putchar('%');
-
-			else if (*format == 's')
-				num_ch = structf(*format)(ar);
-			else
+			switch (*format)
 			{
-				num_ch = structf(*format)(ar);
-				if (num_ch == -1)
-				{
-					va_end(ar);
-					return (-1);
-				}
+				case 'c':
+					cha += _printf_charac(ar);
+					break;
+				case 's':
+					cha += _printf_cad(ar);
+					break;
+				case '%':
+					cha += pf_porcen(ar);
+					break;
+				default:
+					cha += pf_integer(ar);
+					break;
 			}
 		}
 		else
-			num_ch = putchar(*format);
-		if (num_ch == EOF)
 		{
-			va_end(ar);
-			return (-1);
+			cha += putchar(*format);
 		}
-		cha += num_ch;
-			format++;
+		format++;
 	}
 	va_end(ar);
 	return (cha);
