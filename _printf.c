@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include "main.h"
 /**
  * _printf - is a function
