@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 #include <stdarg.h>
 #include <limits.h>
 #include "main.h"
@@ -16,20 +18,18 @@ int _printf_charac(va_list ar)
 /**
  * _printf_cad - is a function
  * @ar: arguments
- * Return: fputs
+ * Return: count 0
  */
 int _printf_cad(va_list ar)
 {
 	char *str = va_arg(ar, char *);
+	int count = 0;
+	int len = strlen(str);
 
 	if (str == NULL)
-	{
-		return (fputs("(null)", stdout));
-	}
-	else
-	{
-		return (fputs(str, stdout));
-	}
+		return (0);
+	count = write(1, str, len);
+	return (count);
 }
 /**
  * pf_porcen - is a function
