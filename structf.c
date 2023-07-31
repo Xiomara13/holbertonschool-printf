@@ -13,16 +13,15 @@ int (*structf(char pf))(va_list)
 		{"s", _printf_cad},
 		{"%", pf_porcen},
 		{"d", pf_integer},
-		{"i", pf_integ},
+		{"i", pf_integer},
 		{NULL, NULL}
 	};
-	while (func[i].pf != 0)
+	while (func[i].pf != NULL)
 	{
 		if (*func[i].pf == pf)
-			return func[i].f;
+			return (func[i].f);
 		i++;
-							        }
-
-				return (NULL);
+	}
+	return (NULL);
 }
 

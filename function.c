@@ -5,18 +5,18 @@
 /**
  * _printf_charac -is a functons
  * @ar: arguments
- * Return: 1 j
+ * Return: putchar
  */
 int _printf_charac(va_list ar)
 {
 	char c = va_arg(ar, int);
 
-	putchar(c);
-	return (1);
+	return (putchar(c));
 }
 /**
  * _printf_cad - is a function
  * @ar: arguments
+ * Return: fputs
  */
 int _printf_cad(va_list ar)
 {
@@ -24,27 +24,52 @@ int _printf_cad(va_list ar)
 
 	if (str == NULL)
 	{
-		fputs("(null)", stdout);
-		return (6);
+		return (fputs("(null)", stdout));
 	}
 	else
 	{
-		int j = 0;
-
-		while (str[j] != '\0')
-		{
-			putchar(str[j]);
-			j++;
-		}
-		return (j);
+		return (fputs(str, stdout));
 	}
 }
 /**
  * pf_porcen - is a function
  * @ar: arguments
+ * Return: putchar
  */
-int pf_porcen(void)
+int pf_porcen(va_list ar)
 {
-	putchar('%');
-	return (1);
+	(void)ar;
+	return (putchar('%'));
+}
+/**
+ * pf_integer - is a function
+ * @ar: arguments
+ * Return: count
+ */
+int pf_integer(va_list ar)
+{
+	int num = va_arg(ar, int);
+	int count = 0;
+	int temp = num;
+	int num_digits = 1;
+	int divi = 1;
+	int i;
+
+	while (temp / 10 > 0)
+	{
+		num_digits++;
+		temp /= 10;
+	}
+	for (i = 1; i < num_digits; i++)
+		divi *= 10;
+
+	while (divi > 0)
+	{
+		int digit = num / divi;
+
+		count *= putchar(digit + '0');
+		num -= digit * divi;
+		divi /= 10;
+	}
+	return (count);
 }
