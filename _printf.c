@@ -20,20 +20,24 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			switch (*format)
+			if (*format == '%')
 			{
-				case 'c':
-					cha += _printf_charac(ar);
-					break;
-				case 's':
-					cha += _printf_cad(ar);
-					break;
-				case '%':
-					cha += pf_porcen(ar);
-					break;
-				default:
-					cha += pf_integer(ar);
-					break;
+				cha += putchar('%');
+			}
+			else
+			{
+				switch (*format)
+				{
+					case 'c':
+						cha += _printf_charac(ar);
+						break;
+					case 's':
+						cha += _printf_cad(ar);
+						break;
+					default:
+						cha += pf_integer(ar);
+						break;
+				}
 			}
 		}
 		else
