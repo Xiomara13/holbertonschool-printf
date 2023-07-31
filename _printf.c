@@ -31,8 +31,15 @@ int _printf(const char *format, ...)
 				case 's':
 					{
 						char *str = va_arg(ar, char *);
-					cha += write(1, str, sizeof(char *));
-					break;
+						int len = strlen(str);                                                                                                                                                                
+						if (str == NULL)
+							return (0);
+						cha = write(1, str, len);
+						/*return (cha);*/
+					 
+						/*char *str = va_arg(ar, char *);
+						cha += write(1, str, sizeof(char *));*/
+						break;
 					}
 				case '%':
 					{
@@ -43,8 +50,8 @@ int _printf(const char *format, ...)
 				default:
 					{
 						num = va_arg(ar, int);
-					cha += write(1, &num, sizeof(int));
-					break;
+						cha += write(1, &num, sizeof(int));
+						break;
 					}
 			
 			

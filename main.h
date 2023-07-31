@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdarg.h>
+#include <string.h>
 /**
  * struct pf - struct pf
  * @pf: the operator
