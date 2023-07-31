@@ -25,6 +25,14 @@ int _printf(const char *format, ...)
 			{
 				cha += putchar('%');
 			}
+			else if  (*format == 's')
+			{
+				char *str = va_arg(ar, char *);
+				if (str == NULL)
+				{
+					cha += fputs(str, stdout);
+				}
+			}
 			else
 			{
 				int (*oper_fun)(va_list) = structf(*format);
