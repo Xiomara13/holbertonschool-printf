@@ -22,23 +22,17 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == '%')
-				cha += putchar('%');
+				num_ch += putchar('%');
 			else
 			{
 				num_ch = structf(*format)(ar);
 				if (num_ch == -1)
-				{
-					cha = -1;
-					break;
-				}
-				cha += num_ch;
+					return (-1);
 			}
 		}
 		else
-		{
-			putchar(*format);
-			cha++;
-		}
+			num_ch = putchar(*format);
+		cha += num_ch;
 		format++;
 	}
 	va_end(ar);
