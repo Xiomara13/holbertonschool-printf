@@ -21,31 +21,26 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '%')
-			{
-				cha += putchar('%');
-			}
-			else if  (*format == 's')
+			if (*format == 's')
 			{
 				char *str = va_arg(ar, char *);
 				if (str == NULL)
-				{
-					cha += fputs(str, stdout);
-				}
+					cha += printf("(null)");
+				else
+					cha += printf("%S", str);
 			}
 			else
 			{
 				int (*oper_fun)(va_list) = structf(*format);
 
 				if (oper_fun != NULL)
-				{
 					cha += oper_fun(ar);
 				}
 			}
-		}
 		else
 		{
-			cha += putchar(*format);
+			putchar(*format);
+			cha++;
 		}
 		format++;
 	}
