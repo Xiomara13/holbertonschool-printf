@@ -11,7 +11,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ar;
-	int cha = 0, num;
+	int cha = 0;
 
 	va_start(ar, format);
 
@@ -23,31 +23,17 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					{
-						char c = va_arg(ar, int);
-						cha += write(1, &c, 1);
-						break;
-					}
+					cha += write(1, &va_arg(ar, int), 1);
+					break;
 				case 's':
-					{
-						char *str = va_arg(ar, char *);
-					cha += write(1, str, sizeof(char *));
+					cha += write(1, va_arg(ar, char *), sizeof(char *));
 					break;
-					}
 				case '%':
-					{
-						char c = '%';
-						cha += write(1, &c, 1);
-						break;
-					}
-				default:
-					{
-						num = va_arg(ar, int);
-					cha += write(1, &num, sizeof(int));
+					cha += write(1, '%', 1);
 					break;
-					}
-			
-			
+				default:
+					cha += write(1, &va_arg(ar, int), sizeof(int));
+					break;
 			}
 		}
 		else
