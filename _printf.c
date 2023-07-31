@@ -23,6 +23,9 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '%')
 				num_ch += putchar('%');
+
+			else if (*format == 's')
+				num_ch = structf(*format)(ar);
 			else
 			{
 				num_ch = structf(*format)(ar);
@@ -41,7 +44,7 @@ int _printf(const char *format, ...)
 			return (-1);
 		}
 		cha += num_ch;
-		format++;
+			format++;
 	}
 	va_end(ar);
 	return (cha);
