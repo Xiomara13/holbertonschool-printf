@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 
 	va_start(ar, format);
 
-	while (*format)
+	while (format && *format)
 	{
 		if (*format == '%')
 		{
@@ -27,11 +27,19 @@ int _printf(const char *format, ...)
 			{
 				num_ch = structf(*format)(ar);
 				if (num_ch == -1)
+				{
+					va_end(ar);
 					return (-1);
+				}
 			}
 		}
 		else
 			num_ch = putchar(*format);
+		if (num_ch == EOF)
+		{
+			va_end(ar);
+			return (-1);
+		}
 		cha += num_ch;
 		format++;
 	}
