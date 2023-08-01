@@ -49,8 +49,6 @@ int _printf(const char *format, ...)
 					}
 				default:
 					{
-						num = va_arg(ar, int);
-						cha += write(1, &num, sizeof(int));
 						break;
 					}
 			
